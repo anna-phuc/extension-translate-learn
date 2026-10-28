@@ -27,6 +27,31 @@ installed on your Mac. On a computer without a signed-in Claude Code, it can use
 - **Vocabulary.** Star a word or phrase in a lesson to save it. You can search the list and export it as CSV, which
   Anki can import.
 
+## Screenshots
+
+Select text on a page, and the popup shows the translation and the key words:
+
+![Translate popup next to a selected sentence](docs/screenshots/translate-popup.png)
+
+**Check my English** marks each fix in the text and explains it:
+
+![Check my English card with three explained fixes](docs/screenshots/check-english.png)
+
+<table>
+  <tr>
+    <td width="50%" valign="top">
+      <p><b>Full lesson</b> in the side panel: words, grammar and patterns.</p>
+      <img src="docs/screenshots/full-lesson.png" alt="Full lesson in Chrome's side panel">
+    </td>
+    <td width="50%" valign="top">
+      <p><b>Vocabulary</b>: starred words, searchable and exportable as CSV.</p>
+      <img src="docs/screenshots/vocabulary.png" alt="Saved vocabulary list">
+      <p><b>Dark mode</b> follows the system setting.</p>
+      <img src="docs/screenshots/dark-mode.png" alt="Translate popup in dark mode">
+    </td>
+  </tr>
+</table>
+
 ## Install (unpacked)
 
 You need [Claude Code](https://claude.com/claude-code) signed in to your Claude account, and Node.js 22.18 or later.
