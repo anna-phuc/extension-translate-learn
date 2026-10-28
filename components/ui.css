@@ -51,9 +51,8 @@
   box-sizing: border-box;
 }
 
-.tl-theme p,
-.tl-theme h3,
-.tl-theme ul {
+/* :where() keeps this reset weaker than any single class, so .tl-translation and the like keep their padding. */
+.tl-theme :where(p, h3, ul) {
   margin: 0;
   padding: 0;
 }
