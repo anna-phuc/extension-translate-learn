@@ -469,3 +469,27 @@
   color: var(--tl-del);
   background: var(--tl-del-bg);
 }
+
+.tl-writing::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin-left: 6px;
+  border-radius: 50%;
+  background: var(--tl-accent);
+  vertical-align: 1px;
+  animation: tl-pulse-dot 1s ease-in-out infinite;
+}
+
+@keyframes tl-pulse-dot {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-writing::after {
+    animation: none;
+  }
+}

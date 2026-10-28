@@ -12,6 +12,9 @@ installed on your Mac. On a computer without a signed-in Claude Code, it can use
   - the grammar at work,
   - reusable sentence patterns,
   - examples.
+
+  The popup fills in as Claude writes and says "Still writing the full lesson…" until the grammar and patterns are
+  done too. A word's ☆ works as soon as that word is complete.
 - **Check my English.** In any text box (textareas, text inputs and rich editors such as Gmail or Slack), a round button
   appears in the corner. Click it to see your text with removed words in red and added words in green, and one
   explanation per fix, tagged *mistake*, *unnatural* or *tip*. **Apply** writes the corrected text into the box;
@@ -136,7 +139,10 @@ npm run zip
 
 ## Known limits
 
-- Each lookup starts Claude Code afresh, which adds a few seconds before the answer starts streaming.
+- Each lookup starts Claude Code afresh. Measured on Haiku 5.5: the translation starts after 1 to 2 seconds, a phrase
+  lesson finishes in about 6 seconds and a sentence lesson in about 8; an English check takes about 5.
+- Haiku is fast but sometimes gets a translation wrong (once, "weigh in on" came back as "chờ ý kiến", "wait for
+  opinions"). Claude Sonnet 5.5, in Settings → Model, is more accurate and slower.
 - Lookups and checks count toward your Claude plan's usage limits, like any Claude Code use. When you hit a limit,
   the popup shows Claude's message.
 - The helper runs `claude` from where `install-helper` found it, with your login shell's `PATH`. After you move

@@ -35,14 +35,18 @@ export function Lesson({ lookup, compact = false, onRetry, onOpenSettings }: Les
   useStopSpeechWith(scope);
   const speak = (part: string, text: string, label?: string) => <SpeakButton id={`${scope}:${part}`} text={text} voice={voice} label={label} />;
 
-  const star = (term: string, make: () => ReturnType<typeof vocabFromLookup>, label: string) => (
+  // While Claude writes, a term is final once the reply has moved on to the next term or the next section.
+  const movedOn = Boolean(result && result.grammar.length + result.patterns.length + result.examples.length > 0);
+  const termReady = (index: number) => !loading || movedOn || index < (result?.breakdown.length ?? 0) - 1;
+
+  const star = (term: string, make: () => ReturnType<typeof vocabFromLookup>, label: string, ready = !loading) => (
     <button
       type="button"
       className={`tl-icon-button tl-star${isSaved(term) ? " tl-star-on" : ""}`}
-      title={isSaved(term) ? `Remove "${term}" from vocabulary` : `Save "${term}" to vocabulary`}
+      title={!ready ? "Available when Claude finishes this word" : isSaved(term) ? `Remove "${term}" from vocabulary` : `Save "${term}" to vocabulary`}
       aria-label={label}
       aria-pressed={isSaved(term)}
-      disabled={loading}
+      disabled={!ready}
       onClick={() => toggle(term, make)}
     >
       <StarIcon size={15} filled={isSaved(term)} />
@@ -101,7 +105,7 @@ export function Lesson({ lookup, compact = false, onRetry, onOpenSettings }: Les
             {terms.map((entry, index) => (
               <Term key={`${entry.term}-${index}`} entry={entry} compact={compact}>
                 {speak(`term:${index}`, entry.term)}
-                {star(entry.term, () => vocabFromEntry(entry, lookup, terms.length === 1 ? result?.pronunciation : ""), `Save "${entry.term}"`)}
+                {star(entry.term, () => vocabFromEntry(entry, lookup, terms.length === 1 ? result?.pronunciation : ""), `Save "${entry.term}"`, termReady(index))}
               </Term>
             ))}
           </ul>
@@ -173,7 +177,11 @@ export function Lesson({ lookup, compact = false, onRetry, onOpenSettings }: Les
         </section>
       ) : null}
 
-      {!compact && loading && result ? <p className="tl-more">Still writing…</p> : null}
+      {loading && result ? (
+        <p className="tl-more tl-writing" aria-live="polite">
+          Still writing{compact ? " the full lesson" : ""}…
+        </p>
+      ) : null}
     </div>
   );
 }
