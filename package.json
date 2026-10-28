@@ -1,0 +1,32 @@
+{
+  "name": "translate-extension",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Select text on any website and get a translation with a word-by-word breakdown, grammar notes and sentence patterns. Check the English you write in any text box.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "wxt",
+    "build": "wxt build",
+    "zip": "wxt zip",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.ts",
+    "postinstall": "wxt prepare",
+    "install-helper": "node --no-warnings helper/install.ts",
+    "uninstall-helper": "node --no-warnings helper/install.ts --uninstall"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.133.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "zod": "4.6.5"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@wxt-dev/module-react": "1.2.2",
+    "typescript": "6.0.3",
+    "wxt": "0.21.4"
+  }
+}

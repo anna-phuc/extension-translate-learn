@@ -1,0 +1,471 @@
+/* Shared by the content script (inside a shadow root) and the side panel. Tokens live on .tl-theme, so they work
+   under :host and under :root alike. */
+.tl-theme {
+  --tl-bg: #ffffff;
+  --tl-surface: #f6f7f9;
+  --tl-surface-2: #eceef2;
+  --tl-border: #dfe2e8;
+  --tl-text: #1d2129;
+  --tl-muted: #646b78;
+  --tl-accent: #3b5bdb;
+  --tl-accent-soft: #e8edff;
+  --tl-accent-text: #ffffff;
+  --tl-del: #c92a2a;
+  --tl-del-bg: #ffe3e3;
+  --tl-ins: #2b8a3e;
+  --tl-ins-bg: #d3f9d8;
+  --tl-star: #f08c00;
+  --tl-shadow: 0 10px 32px rgba(15, 23, 42, 0.18), 0 2px 6px rgba(15, 23, 42, 0.08);
+  --tl-radius: 12px;
+  --tl-font: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --tl-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  color-scheme: light;
+  color: var(--tl-text);
+  font: 14px/1.5 var(--tl-font);
+}
+
+@media (prefers-color-scheme: dark) {
+  .tl-theme {
+    --tl-bg: #1c1f26;
+    --tl-surface: #252932;
+    --tl-surface-2: #2f343f;
+    --tl-border: #3a404c;
+    --tl-text: #e7e9ee;
+    --tl-muted: #9aa1ae;
+    --tl-accent: #7c93ff;
+    --tl-accent-soft: #2b3358;
+    --tl-accent-text: #0f1220;
+    --tl-del: #ff8787;
+    --tl-del-bg: #4a2326;
+    --tl-ins: #69db7c;
+    --tl-ins-bg: #1f3d27;
+    --tl-star: #ffc078;
+    --tl-shadow: 0 10px 32px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+    color-scheme: dark;
+  }
+}
+
+.tl-theme *,
+.tl-theme *::before,
+.tl-theme *::after {
+  box-sizing: border-box;
+}
+
+.tl-theme p,
+.tl-theme h3,
+.tl-theme ul {
+  margin: 0;
+  padding: 0;
+}
+
+.tl-theme ul {
+  list-style: none;
+}
+
+.tl-theme code {
+  font-family: var(--tl-mono);
+  font-size: 0.92em;
+  background: var(--tl-surface-2);
+  border-radius: 4px;
+  padding: 0 4px;
+}
+
+.tl-theme strong {
+  font-weight: 650;
+}
+
+.tl-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Buttons */
+.tl-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 30px;
+  padding: 0 12px;
+  border: 1px solid var(--tl-border);
+  border-radius: 8px;
+  background: var(--tl-bg);
+  color: var(--tl-text);
+  font: 500 13px/1 var(--tl-font);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tl-button:hover {
+  background: var(--tl-surface);
+}
+
+.tl-button:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.tl-button-primary {
+  background: var(--tl-accent);
+  border-color: var(--tl-accent);
+  color: var(--tl-accent-text);
+}
+
+.tl-button-primary:hover {
+  background: var(--tl-accent);
+  filter: brightness(1.08);
+}
+
+.tl-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  color: var(--tl-muted);
+  cursor: pointer;
+}
+
+.tl-icon-button:hover {
+  background: var(--tl-surface-2);
+  color: var(--tl-text);
+}
+
+.tl-icon-button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.tl-star-on,
+.tl-star-on:hover {
+  color: var(--tl-star);
+}
+
+.tl-button:focus-visible,
+.tl-icon-button:focus-visible {
+  outline: 2px solid var(--tl-accent);
+  outline-offset: 1px;
+}
+
+.tl-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Lesson */
+.tl-lesson {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tl-lesson-compact {
+  gap: 10px;
+}
+
+.tl-source-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.tl-source {
+  flex: 1;
+  min-width: 0;
+}
+
+.tl-source-text {
+  font-size: 15px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.tl-pronunciation {
+  color: var(--tl-muted);
+  font-size: 13px;
+}
+
+.tl-translation {
+  font-size: 15px;
+  padding: 10px 12px;
+  background: var(--tl-accent-soft);
+  border-radius: 10px;
+  overflow-wrap: anywhere;
+}
+
+.tl-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tl-section h3 {
+  color: var(--tl-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.tl-terms {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tl-term {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid var(--tl-border);
+  border-radius: 10px;
+}
+
+.tl-lesson-compact .tl-term {
+  padding: 6px 8px;
+}
+
+.tl-term-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.tl-term-name {
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.tl-tag {
+  display: inline-block;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: var(--tl-surface-2);
+  color: var(--tl-muted);
+  font-size: 11.5px;
+  line-height: 18px;
+  vertical-align: 1px;
+}
+
+.tl-term-meaning {
+  overflow-wrap: anywhere;
+}
+
+.tl-note {
+  color: var(--tl-muted);
+  font-size: 13px;
+  margin-top: 2px;
+}
+
+.tl-cards {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tl-cards li {
+  padding: 10px 12px;
+  background: var(--tl-surface);
+  border-radius: 10px;
+}
+
+.tl-card-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.tl-example {
+  color: var(--tl-muted);
+  font-style: italic;
+}
+
+.tl-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 12px;
+  border-left: 3px solid var(--tl-border);
+}
+
+.tl-more {
+  color: var(--tl-muted);
+  font-size: 12.5px;
+}
+
+.tl-error {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--tl-del-bg);
+  color: var(--tl-text);
+}
+
+/* A command in an error message is copied as a whole, so it never breaks across lines. */
+.tl-error code {
+  white-space: nowrap;
+}
+
+.tl-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tl-shimmer {
+  display: block;
+  height: 14px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, var(--tl-surface) 0%, var(--tl-surface-2) 50%, var(--tl-surface) 100%);
+  background-size: 200% 100%;
+  animation: tl-shimmer 1.2s ease-in-out infinite;
+}
+
+.tl-shimmer-short {
+  width: 60%;
+}
+
+@keyframes tl-shimmer {
+  from {
+    background-position: 100% 0;
+  }
+  to {
+    background-position: -100% 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-shimmer {
+    animation: none;
+  }
+}
+
+/* Check my English */
+.tl-diff {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.tl-diff del {
+  color: var(--tl-del);
+  background: var(--tl-del-bg);
+  text-decoration: line-through;
+  border-radius: 3px;
+}
+
+.tl-diff ins {
+  color: var(--tl-ins);
+  background: var(--tl-ins-bg);
+  text-decoration: none;
+  border-radius: 3px;
+}
+
+/* A replacement reads as two words ("are has been"), not one ("arehas been"). */
+.tl-diff del + ins {
+  margin-left: 0.25em;
+}
+
+.tl-issues {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tl-issue {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  background: var(--tl-surface);
+  border-radius: 10px;
+}
+
+.tl-issue-change {
+  overflow-wrap: anywhere;
+}
+
+.tl-issue-change del {
+  color: var(--tl-del);
+}
+
+.tl-issue-change ins {
+  color: var(--tl-ins);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.tl-issue-tag {
+  align-self: flex-start;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.tl-issue-tag-mistake {
+  background: var(--tl-del-bg);
+  color: var(--tl-del);
+}
+
+.tl-issue-tag-unnatural {
+  background: var(--tl-accent-soft);
+  color: var(--tl-accent);
+}
+
+.tl-issue-tag-tip {
+  background: var(--tl-surface-2);
+  color: var(--tl-muted);
+}
+
+.tl-issue-why {
+  color: var(--tl-muted);
+  font-size: 13px;
+}
+
+/* Pronunciation */
+.tl-speak-on,
+.tl-speak-on:hover {
+  color: var(--tl-accent);
+  background: var(--tl-accent-soft);
+}
+
+.tl-speak-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.tl-speak-row > p {
+  flex: 1;
+  min-width: 0;
+  padding-top: 3px;
+}
+
+.tl-speak-row .tl-icon-button {
+  width: 26px;
+  height: 26px;
+}
+
+.tl-term > .tl-icon-button + .tl-icon-button,
+.tl-source-row > .tl-icon-button + .tl-icon-button {
+  margin-left: -6px;
+}
+
+.tl-speak-failed,
+.tl-speak-failed:hover {
+  color: var(--tl-del);
+  background: var(--tl-del-bg);
+}
